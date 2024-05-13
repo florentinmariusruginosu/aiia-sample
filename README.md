@@ -42,3 +42,26 @@ You can find Aiia documentation at <https://docs.aiia.eu/>
 9. Press on one of the accounts in the list
 10. You'll be shown the transactions list (if transaction page is empty, that's fine, we fetch transaction data asynchronously so it's not always there at the beginning, but we notify clients when that's done via [webhook](https://api.aiia.eu/docs/index.html#section/Webhooks))
 11. If running the project not through our webpage you can also try out payments.
+
+
+### Using Docker
+
+STEP 1
+
+```
+RUN these commands in cmd or powershell (for windows):
+dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p myPass
+dotnet dev-certs https --trust
+```
+```
+RUN these commands in terminal (for mac, not tested):
+dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p myPass
+dotnet dev-certs https --trust
+```
+
+STEP 2
+
+```
+RUN this command in root directory:
+docker-compose up
+```

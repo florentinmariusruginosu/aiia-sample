@@ -1,0 +1,25 @@
+version: '3.7'
+networks:
+  aiiasampleapp:
+    name: aiiasampleapp
+    external: false
+services:
+  app:
+    networks:
+      - aiiasampleapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:8081;http://+:8080;
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=myPass
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__AllowInvalid=true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "5022:8080"
+      - "5023:8081"
+    volumes:
+      - ~/.aspnet/https:/https:ro
